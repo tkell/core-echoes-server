@@ -30,7 +30,7 @@ def add_route():
     print "HELLO", request, request.data
     redis.rpushx(trace_list, request.data)
     val = redis.lrange(trace_list, 0, 20)
-    print vat, "<-- there should be a thing?"
+    print val, "<-- there should be a thing?"
     return ''
 
 @app.route("/delete_route", methods=['DELETE'])
