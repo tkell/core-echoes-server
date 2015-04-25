@@ -34,7 +34,7 @@ def add_route():
 def delete_route():
     '''Deletes the trace from the front of the queue'''
     val = redis.lpop(trace_list)
-    return val
+    return jsonify(val)
 
 if __name__ == "__main__":
     app.run(debug=True)
