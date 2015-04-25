@@ -12,9 +12,9 @@ from flask.ext.cors import CORS
 app = Flask(__name__)
 cors = CORS(app)
 
-#redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
-#redis = redis.from_url(redis_url)
-#trace_list = 'traces'
+redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
+redis = redis.from_url(redis_url)
+trace_list = 'traces'
 
 @app.route("/route", methods=['GET'])
 def get_route():
