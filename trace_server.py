@@ -23,7 +23,7 @@ def get_route():
     val = redis.lrange(trace_list, 0, 0)
     if val:
         res = val[0]
-    else
+    else:
         res = ''
     return res
 
