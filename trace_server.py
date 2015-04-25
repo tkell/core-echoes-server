@@ -29,6 +29,8 @@ def add_route():
     '''Add a new trace to the back of the queue'''
     print "HELLO", request, request.data
     redis.rpushx(trace_list, request.data)
+    val = redis.lrange(trace_list, 0, 20)
+    print vat, "<-- there should be a thing?"
     return ''
 
 @app.route("/delete_route", methods=['DELETE'])
