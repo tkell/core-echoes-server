@@ -6,6 +6,7 @@ import json
 import redis
 from flask import Flask
 from flask import jsonify
+from flask import request
 from flask.ext.cors import CORS 
 
 app = Flask(__name__)
