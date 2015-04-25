@@ -26,10 +26,9 @@ def get_route():
 @app.route("/route", methods=['POST'])
 def add_route():
     '''Add a new trace to the back of the queue'''
+    print request.data, "HELLO"
     val = redis.rpush(trace_list, request.data)
-    route = {'data': val}
-    res = json.dumps(route)
-    return res
+    return val
 
 @app.route("/route", methods=['DELETE'])
 def delete_route():
@@ -40,5 +39,5 @@ def delete_route():
     return res
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
 
