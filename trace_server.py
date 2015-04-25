@@ -12,9 +12,9 @@ from flask.ext.cors import CORS
 app = Flask(__name__)
 cors = CORS(app)
 
-redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
-redis = redis.from_url(redis_url)
-trace_list = 'traces'
+#redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
+#redis = redis.from_url(redis_url)
+#trace_list = 'traces'
 
 @app.route("/route", methods=['GET'])
 def get_route():
@@ -28,8 +28,8 @@ def get_route():
 def add_route():
     '''Add a new trace to the back of the queue'''
     print "HELLO", request, request.data
-    val = redis.rpush(trace_list, request.data)
-    return val
+    redis.rpush(trace_list, "wombat")
+    return ''
 
 @app.route("/delete_route", methods=['DELETE'])
 def delete_route():
