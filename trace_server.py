@@ -16,12 +16,10 @@ redis = redis.from_url(redis_url)
 trace_list = 'traces'
 
 @app.route("/route")
+# Gets the current trace
 def get_route():
-    # get the sound from our database
-    redis.rpush(trace_list, "this one!")
-    redis.rpush(trace_list, "not this one")
-    val = redis.lpop(trace_list)
-    route = [{'a': 'yes', 'b': 'no'}, {'c': val}]
+    val = redis.lrange(trace_list, 0, 1)
+    route = {'data': val}
     res = json.dumps(route)
     return res
 
