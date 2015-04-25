@@ -19,7 +19,7 @@ trace_list = 'traces'
 @app.route("/route", methods=['GET'])
 def get_route():
     '''Gets the current trace'''
-    val = redis.lrange(trace_list, 0, 20)
+    val = redis.lrange(trace_list, 0, 0)
     route = {'data': val}
     res = json.dumps(route)
     return res
@@ -27,10 +27,7 @@ def get_route():
 @app.route("/add_route", methods=['POST'])
 def add_route():
     '''Add a new trace to the back of the queue'''
-    print "HELLO", request, request.data
     redis.rpush(trace_list, json.dumps(request.data))
-    val = redis.lrange(trace_list, 0, 20)
-    print val, "<-- there should be a thing?"
     return ''
 
 @app.route("/delete_route", methods=['DELETE'])
