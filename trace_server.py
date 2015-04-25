@@ -23,14 +23,14 @@ def get_route():
     res = json.dumps(route)
     return res
 
-@app.route("/route", methods=['POST'])
+@app.route("/add_route", methods=['POST'])
 def add_route():
     '''Add a new trace to the back of the queue'''
     print request.data, "HELLO"
     val = redis.rpush(trace_list, request.data)
     return val
 
-@app.route("/route", methods=['DELETE'])
+@app.route("/delete_route", methods=['DELETE'])
 def delete_route():
     '''Deletes the trace from the front of the queue'''
     val = redis.lpop(trace_list)
