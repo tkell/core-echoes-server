@@ -19,7 +19,7 @@ trace_list = 'traces'
 @app.route("/route", methods=['GET'])
 def get_route():
     '''Gets the current trace'''
-    val = redis.lrange(trace_list, 0, 1)
+    val = redis.lrange(trace_list, 0, 0)
     route = {'data': val}
     res = json.dumps(route)
     return res
