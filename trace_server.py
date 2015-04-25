@@ -20,7 +20,7 @@ trace_list = 'traces'
 def get_route():
     '''Gets the current trace'''
     val = redis.lrange(trace_list, 0, 0)
-    return val
+    return jsonify(val)
 
 @app.route("/add_route", methods=['POST'])
 def add_route():
