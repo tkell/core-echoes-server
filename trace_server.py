@@ -27,7 +27,7 @@ def get_route():
 @app.route("/add_route", methods=['POST'])
 def add_route():
     '''Add a new trace to the back of the queue'''
-    redis.rpush(trace_list, json.dumps(request.data))
+    redis.rpush(trace_list, request.data)
     return ''
 
 @app.route("/delete_route", methods=['DELETE'])
