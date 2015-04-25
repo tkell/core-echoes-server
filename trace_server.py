@@ -19,7 +19,6 @@ trace_list = 'traces'
 @app.route("/route", methods=['GET'])
 def get_route():
     '''Gets the current trace'''
-    print "hello?"
     val = redis.lrange(trace_list, 0, 0)
     if val:
         res = val[0]
