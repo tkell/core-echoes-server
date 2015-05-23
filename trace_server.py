@@ -31,7 +31,8 @@ def count():
     count = redis.llen(trace_list)
     return jsonify({'count': count})
 
-@app.route("/delete_all", methods=['GET'])
+# Debug
+# @app.route("/delete_all", methods=['GET'])
 def delete_all():
     '''Debug:  clears the redis queue'''
     res = redis.ltrim(trace_list, 0, 0)
