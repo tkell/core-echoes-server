@@ -27,7 +27,8 @@ def status():
 @app.route("/count", methods=['GET'])
 def count():
     '''returns the number of traces currently stored'''
-    return redis.dbsize()
+    count = redis.dbsize()
+    return jsonify({'count': count})
 
 @app.route("/route", methods=['GET'])
 def get_route():
