@@ -35,6 +35,7 @@ def count():
 def delete_all():
     '''Debug:  clears the redis queue'''
     res = redis.ltrim(trace_list, 0, 0)
+    res = redis.lpop(trace_list)
     count = redis.llen(trace_list)
     return jsonify({'count': count})
 
