@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
+## Need to build /diagnostics!
+
 import os
 import json
 import redis
@@ -15,6 +18,14 @@ cors = CORS(app)
 redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
 redis = redis.from_url(redis_url)
 trace_list = 'traces'
+
+@app.route("/status", methods=['GET'])
+    '''returns the status'''
+    return "Online:  %d traces in the db" % redis.dbsize()
+
+@app.route("/count", methods=['GET'])
+    '''returns the number of traces currently stored'''
+    return redis.dbsize()
 
 @app.route("/route", methods=['GET'])
 def get_route():
@@ -34,9 +45,9 @@ def add_route():
 
 @app.route("/delete_route", methods=['DELETE'])
 def delete_route():
-    '''Deletes the trace from the front of the queue'''
+    '''Deletes the trace from the front of the queue, and return the newest thing'''
     val = redis.lpop(trace_list)
-    return ''
+    return get_route()
 
 if __name__ == "__main__":
     app.run(debug=True)
