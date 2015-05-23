@@ -49,7 +49,7 @@ def add_route():
 
 @app.route("/delete_route", methods=['DELETE'])
 def delete_route():
-    '''Deletes the trace from the front of the queue, and return the trace after that'''
+    '''Deletes the trace from the front of the queue, and return the trace *after* that'''
     val = redis.lpop(trace_list)
     return get_route()
 
