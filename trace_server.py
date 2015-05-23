@@ -20,10 +20,12 @@ redis = redis.from_url(redis_url)
 trace_list = 'traces'
 
 @app.route("/status", methods=['GET'])
+def status():
     '''returns the status'''
     return "Online:  %d traces in the db" % redis.dbsize()
 
 @app.route("/count", methods=['GET'])
+def count():
     '''returns the number of traces currently stored'''
     return redis.dbsize()
 
