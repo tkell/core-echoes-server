@@ -27,7 +27,7 @@ def status():
 @app.route("/count", methods=['GET'])
 def count():
     '''returns the number of traces currently stored'''
-    count = redis.dbsize()
+    count = redis.llen(trace_list)
     return jsonify({'count': count})
 
 @app.route("/route", methods=['GET'])
@@ -48,7 +48,7 @@ def add_route():
 
 @app.route("/delete_route", methods=['DELETE'])
 def delete_route():
-    '''Deletes the trace from the front of the queue, and return the newest thing'''
+    '''Deletes the trace from the front of the queue, and return the trace after that'''
     val = redis.lpop(trace_list)
     return get_route()
 
