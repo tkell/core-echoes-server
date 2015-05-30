@@ -50,7 +50,7 @@ def get_route():
         res = val[0]
     else:
         res = ''
-    return json.dumps(res)
+    return res
 
 @app.route("/add_route", methods=['POST'])
 def add_route():
