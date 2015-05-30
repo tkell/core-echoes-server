@@ -57,7 +57,10 @@ def add_route():
     '''Add a new trace to the back of the queue'''
     trace = request.data['trace']
     target = request.data['target']
-    redis.rpush(trace_list, request.data)
+    print request.data
+    print trace
+    print target
+    redis.rpush(trace_list, trace)
     redis.set(last_ip, target)
     return ''
 
