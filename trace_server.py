@@ -25,7 +25,7 @@ def status():
     '''returns the status'''
     count = redis.llen(trace_list)
     last_ip = redis.get(last_ip)
-    return "Online:  %d traces in the db.  Last sent IP is %s" % count, last_ip
+    return "Online:  %d traces in the db.  Last sent IP is %s" % (count, last_ip)
 
 @app.route("/count", methods=['GET'])
 def count():
@@ -55,12 +55,9 @@ def get_route():
 @app.route("/add_route", methods=['POST'])
 def add_route():
     '''Add a new trace to the back of the queue'''
-    print request.data
-    print json.loads(request.data)
     data = json.loads(request.data)
     trace = data['trace']
     target = data['target']
-    print trace, target
     redis.rpush(trace_list, trace)
     redis.set(last_ip, target)
     return ''
