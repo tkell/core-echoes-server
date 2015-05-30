@@ -18,12 +18,14 @@ cors = CORS(app)
 redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
 redis = redis.from_url(redis_url)
 trace_list = 'traces'
+last_ip = 'last_ip'
 
 @app.route("/status", methods=['GET'])
 def status():
     '''returns the status'''
     count = redis.llen(trace_list)
-    return "Online:  %d traces in the db" % count
+    last_ip = redis.get(last_ip)
+    return "Online:  %d traces in the db.  Last sent IP is %s" % count, last_ip
 
 @app.route("/count", methods=['GET'])
 def count():
@@ -53,7 +55,10 @@ def get_route():
 @app.route("/add_route", methods=['POST'])
 def add_route():
     '''Add a new trace to the back of the queue'''
+    trace = request.data['trace']
+    target = request.data['target']
     redis.rpush(trace_list, request.data)
+    redis.set(last_ip, target)
     return ''
 
 @app.route("/delete_route", methods=['DELETE'])
