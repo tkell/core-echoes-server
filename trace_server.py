@@ -50,7 +50,7 @@ def get_route():
         res = val[0]
     else:
         res = ''
-    return res
+    return jsonify(res)
 
 @app.route("/add_route", methods=['POST'])
 def add_route():
