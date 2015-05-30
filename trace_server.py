@@ -24,9 +24,7 @@ last_ip = 'last_ip'
 def status():
     '''returns the status'''
     count = redis.llen(trace_list)
-    print "trying to get last ip"
     last = redis.get(last_ip)
-    print count, last
     return "Online:  %d traces in the db.  Last sent IP is %s" % (count, last)
 
 @app.route("/count", methods=['GET'])
@@ -36,7 +34,7 @@ def count():
     return jsonify({'count': count})
 
 # Debug
-@app.route("/delete_all", methods=['GET'])
+#@app.route("/delete_all", methods=['GET'])
 def delete_all():
     '''Debug:  clears the redis queue'''
     res = redis.ltrim(trace_list, 0, 0)
@@ -62,8 +60,6 @@ def add_route():
     target = data['target']
     redis.rpush(trace_list, trace)
     redis.set(last_ip, target)
-    print target
-    print redis.get(last_ip)
     return ''
 
 @app.route("/delete_route", methods=['DELETE'])
