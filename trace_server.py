@@ -24,7 +24,9 @@ last_ip = 'last_ip'
 def status():
     '''returns the status'''
     count = redis.llen(trace_list)
+    print "trying to get last ip"
     last_ip = redis.get(last_ip)
+    print count, last_ip
     return "Online:  %d traces in the db.  Last sent IP is %s" % (count, last_ip)
 
 @app.route("/count", methods=['GET'])
