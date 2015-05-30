@@ -62,6 +62,8 @@ def add_route():
     target = data['target']
     redis.rpush(trace_list, trace)
     redis.set(last_ip, target)
+    print target
+    print redis.get(last_ip)
     return ''
 
 @app.route("/delete_route", methods=['DELETE'])
